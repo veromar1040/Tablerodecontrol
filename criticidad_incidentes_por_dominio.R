@@ -54,6 +54,8 @@ criticidadtele <-data.frame(subset(query,Dominio == "Telecomunicaciones", select
 metricatele<-table(criticidadtele)
 metricatele
 
+par(mfrow=c(3,5))
+
 pie(metricaadmin, main = "Administrativo", col = c("steelblue", "darkred", "darkolivegreen4"),labels = metricaadmin,  radius = 0.5)
  pie(metricaadminident, main = "Identidades y Accesos", col = c("steelblue", "darkred", "darkolivegreen4"),labels = metricaadminident,  radius = 0.5)
  pie(metricacanales, main = "Canales y Tarjetas", col = c("steelblue", "darkred", "darkolivegreen4"),labels = metricacanales,  radius = 0.5)
