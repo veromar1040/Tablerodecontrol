@@ -1,96 +1,58 @@
----
-title: "Tablero de control corporativo para la medición de incidentes de tecnología"
-output: 
-  flexdashboard::flex_dashboard:
-    orientation: rows
-    vertical_layout: fill
-
----
-
-```{r setup, include=FALSE}
-library(flexdashboard)
-library(rJava)
-library(RMongo)
-
-```
-
-row
------------------------------------------------------------------------
-
-### Incidentes generados en cada prioridad
-
-```{r}
-mongo <- mongoDbConnect("test")
-query <- dbGetQuery(mongo, 'incidentes',"")
-prioridad<-table(query$prioridad)
-pie(prioridad, col = c("steelblue", "darkred", "darkolivegreen4"), main="Incidentes generados en cada prioridad", labels = prioridad,  radius = 0.9)
-legend("topright", c("Critica","Media", "Baja"), cex = 0.9,fill = c( "darkred", "darkolivegreen4","steelblue"),bty = 'n')
-
-
-```
-
-
-row
------------------------------------------------------------------------
-
-### Criticidad por Dominio
-
-
-```{r}
-mongo <- mongoDbConnect("test")
-query <- dbGetQuery(mongo, 'incidentes',"")
 criticidaddominio <-data.frame(subset(query,select =c(Dominio, prioridad)))
 metricaprioridad<-table(criticidaddominio)
+metricaprioridad
 
 criticidadadmin <-data.frame(subset(query,Dominio == "Administrativo", select =c(Dominio, prioridad)))
 metricaadmin<-table(criticidadadmin)
-
+metricaadmin
 
 criticidadadminident <-data.frame(subset(query,Dominio == "Administracion de Identidades y Accesos", select =c(Dominio, prioridad)))
 metricaadminident<-table(criticidadadminident)
+metricaadminident
 
 criticidadcanales <-data.frame(subset(query,Dominio == "Canales y Tarjetas", select =c(Dominio, prioridad)))
 metricacanales<-table(criticidadcanales)
+metricacanales
 
 criticidadclientes <-data.frame(subset(query,Dominio == "Clientes y ERP", select =c(Dominio, prioridad)))
 metricaclientes<-table(criticidadclientes)
-
+metricaclientes
 
 criticidadinfo <-data.frame(subset(query,Dominio == "Informacion y Aplicaciones Corporativas", select =c(Dominio, prioridad)))
 metricainfo<-table(criticidadinfo)
-
+metricainfo
 
 criticidadint <-data.frame(subset(query,Dominio == "Integrada Operacion de TI", select =c(Dominio, prioridad)))
 metricaint<-table(criticidadint)
-
+metricaint
 
 criticidadlog <-data.frame(subset(query,Dominio == "Logistica Integral", select =c(Dominio, prioridad)))
 metricalog<-table(criticidadlog)
-
+metricalog
 
 criticidadneg <-data.frame(subset(query,Dominio == "Negocios Especializados", select =c(Dominio, prioridad)))
 metricaneg<-table(criticidadneg)
-
+metricaneg
 
 criticidadope <-data.frame(subset(query,Dominio == "Operaciones", select =c(Dominio, prioridad)))
 metricaope<-table(criticidadope)
-
+metricaope
 
 criticidadplatcen <-data.frame(subset(query,Dominio == "Plataformas Centrales", select =c(Dominio, prioridad)))
 metricaplatcen<-table(criticidadplatcen)
-
+metricaplatcen
 
 criticidadplatdis <-data.frame(subset(query,Dominio == "Plataformas Distribuidas y Colaboracion", select =c(Dominio, prioridad)))
 metricaplatdis<-table(criticidadplatdis)
-
+metricaplatdis
 
 criticidadsopban <-data.frame(subset(query,Dominio == "Soporte de Aplicaciones Banistmo", select =c(Dominio, prioridad)))
 metricasopban<-table(criticidadsopban)
-
+metricasopban
 
 criticidadtele <-data.frame(subset(query,Dominio == "Telecomunicaciones", select =c(Dominio, prioridad)))
 metricatele<-table(criticidadtele)
-
+metricatele
 
 pie(metricaadmin, main = "Administrativo", col = c("steelblue", "darkred", "darkolivegreen4"),labels = metricaadmin,  radius = 0.5)
  pie(metricaadminident, main = "Identidades y Accesos", col = c("steelblue", "darkred", "darkolivegreen4"),labels = metricaadminident,  radius = 0.5)
@@ -106,32 +68,4 @@ pie(metricaadmin, main = "Administrativo", col = c("steelblue", "darkred", "dark
  pie(metricasopban, main = "Aplicaciones Banistmo", col = c("steelblue", "darkred", "darkolivegreen4"),labels = metricasopban,  radius = 0.5)
  pie(metricatele, main = "Telecomunicaciones", col = c("steelblue", "darkred", "darkolivegreen4"),labels = metricatele,  radius = 0.5)
 
-
-
-```
-
-row
------------------------------------------------------------------------
-
-### Incidentes Abiertos por Dominio
-
-```{r}
-abiertosdominio <-data.frame(subset(query,estado =="OP", select =c(Dominio, estado)))
-metricaabiertos<-table(sort(abiertosdominio$Dominio, abiertosdominio$estado,decreasing = T))
-
-
-barplot(sort(metricaabiertos), col = sample(colours(), 12), main= "Incidentes Abiertos por Dominio",las=1,  xlab = "Incidentes Abiertos", legend = TRUE, beside= TRUE, xlim=c(1,21),args.legend = list(x="topleft", cex = .65, bty = 'n'), names.arg = FALSE)
-```
-
-### Incidentes Generados por Dominio
-
-```{r}
-generadodominio <-data.frame(subset(query, fecha_apertura <="Sys.time()-34", select =c(Dominio, estado)))
-metricagenerados<-table(generadodominio)
-
-
-
-barplot(as.matrix(metricagenerados), col=c('blue','red','black','yellow','pink','purple','gray','green','orange','yellow4','turquoise','tan4','tomato2'), main= "Incidentes Generados por Dominio",las=1,  xlab = "Incidentes Generados", legend = TRUE, beside= TRUE, args.legend = list(x="topleft", cex = .7, bty = 'n'), ylim=c(0,40))
-
-
-```
+legend("bottomright", c("Critica","Media", "Baja"), cex = 0.8,fill = c( "darkred", "darkolivegreen4","steelblue"))
