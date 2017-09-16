@@ -23,8 +23,8 @@ row
 mongo <- mongoDbConnect("test")
 query <- dbGetQuery(mongo, 'incidentes',"")
 prioridad<-table(query$prioridad)
-pie(prioridad, col = c("steelblue", "darkred", "darkolivegreen4"), main="Incidentes generados en cada prioridad", labels = prioridad,  radius = 0.9)
-legend("topright", c("Critica","Media", "Baja"), cex = 0.9,fill = c( "darkred", "darkolivegreen4","steelblue"),bty = 'n')
+pie(prioridad, col = c("goldenrod1", "darkred", "darkorange1"), main="Incidentes generados en cada prioridad", labels = prioridad,  radius = 0.9)
+legend("topright", c("Crítica","Media", "Baja"), cex = 0.8,fill = c( "darkred", "darkorange1","goldenrod1"), bty = 'n')
 
 
 ```
@@ -92,19 +92,19 @@ criticidadtele <-data.frame(subset(query,Dominio == "Telecomunicaciones", select
 metricatele<-table(criticidadtele)
 
 
-pie(metricaadmin, main = "Administrativo", col = c("steelblue", "darkred", "darkolivegreen4"),labels = metricaadmin,  radius = 0.5)
- pie(metricaadminident, main = "Identidades y Accesos", col = c("steelblue", "darkred", "darkolivegreen4"),labels = metricaadminident,  radius = 0.5)
- pie(metricacanales, main = "Canales y Tarjetas", col = c("steelblue", "darkred", "darkolivegreen4"),labels = metricacanales,  radius = 0.5)
- pie(metricaclientes, main = "Clientes y ERP", col = c("steelblue", "darkred", "darkolivegreen4"),labels = metricaclientes,  radius = 0.5)
- pie(metricainfo, main = "Informacion", col = c("steelblue", "darkred", "darkolivegreen4"),labels = metricainfo,  radius = 0.5)
- pie(metricaint, main = "Integrada Operacion de TI", col = c("steelblue", "darkred", "darkolivegreen4"),labels = metricaint,  radius = 0.5)
- pie(metricalog, main = "Logistica Integral", col = c("steelblue", "darkred", "darkolivegreen4"),labels = metricalog,  radius = 0.5)
- pie(metricaneg, main = "Negocios Especializados", col = c("steelblue", "darkred", "darkolivegreen4"),labels = metricaneg,  radius = 0.5)
- pie(metricaope, main = "Operaciones", col = c("steelblue", "darkred", "darkolivegreen4"),labels = metricaope,  radius = 0.5)
- pie(metricaplatcen, main = "Plataformas Centrales", col = c("steelblue", "darkred", "darkolivegreen4"),labels = metricaplatcen,  radius = 0.5)
- pie(metricaplatdis, main = "Plataformas Distribuidas", col = c("steelblue", "darkred", "darkolivegreen4"),labels = metricaplatdis,  radius = 0.5)
- pie(metricasopban, main = "Aplicaciones Banistmo", col = c("steelblue", "darkred", "darkolivegreen4"),labels = metricasopban,  radius = 0.5)
- pie(metricatele, main = "Telecomunicaciones", col = c("steelblue", "darkred", "darkolivegreen4"),labels = metricatele,  radius = 0.5)
+pie(metricaadmin, main = "Administrativo", col = c("goldenrod1", "darkred", "darkorange1"),labels = metricaadmin,  radius = 0.5)
+ pie(metricaadminident, main = "Identidades y Accesos", col = c("goldenrod1", "darkred", "darkorange1"),labels = metricaadminident,  radius = 0.5)
+ pie(metricacanales, main = "Canales y Tarjetas", col = c("goldenrod1", "darkred", "darkorange1"),labels = metricacanales,  radius = 0.5)
+ pie(metricaclientes, main = "Clientes y ERP", col = c("goldenrod1", "darkred", "darkorange1"),labels = metricaclientes,  radius = 0.5)
+ pie(metricainfo, main = "Informacion", col = c("goldenrod1", "darkred", "darkorange1"),labels = metricainfo,  radius = 0.5)
+ pie(metricaint, main = "Integrada Operacion de TI", col = c("goldenrod1", "darkred", "darkorange1"),labels = metricaint,  radius = 0.5)
+ pie(metricalog, main = "Logistica Integral", col = c("goldenrod1", "darkred", "darkorange1"),labels = metricalog,  radius = 0.5)
+ pie(metricaneg, main = "Negocios Especializados", col = c("goldenrod1", "darkred", "darkorange1"),labels = metricaneg,  radius = 0.5)
+ pie(metricaope, main = "Operaciones", col = c("goldenrod1", "darkred", "darkorange1"),labels = metricaope,  radius = 0.5)
+ pie(metricaplatcen, main = "Plataformas Centrales", col = c("goldenrod1", "darkred", "darkorange1"),labels = metricaplatcen,  radius = 0.5)
+ pie(metricaplatdis, main = "Plataformas Distribuidas", col = c("goldenrod1", "darkred", "darkorange1"),labels = metricaplatdis,  radius = 0.5)
+ pie(metricasopban, main = "Aplicaciones Banistmo", col = c("goldenrod1", "darkred", "darkorange1"),labels = metricasopban,  radius = 0.5)
+ pie(metricatele, main = "Telecomunicaciones", col = c("goldenrod1", "darkred", "darkorange1"),labels = metricatele,  radius = 0.5)
 
 
 
@@ -120,7 +120,7 @@ abiertosdominio <-data.frame(subset(query,estado =="OP", select =c(Dominio, esta
 metricaabiertos<-table(sort(abiertosdominio$Dominio, abiertosdominio$estado,decreasing = T))
 
 
-barplot(sort(metricaabiertos), col = sample(colours(), 12), main= "Incidentes Abiertos por Dominio",las=1,  xlab = "Incidentes Abiertos", legend = TRUE, beside= TRUE, xlim=c(1,21),args.legend = list(x="topleft", cex = .65, bty = 'n'), names.arg = FALSE)
+barplot(sort(metricaabiertos), col = c('blue','red','black','yellow','pink','purple','gray','green','orange','yellow4','turquoise','tan4'), main= "Incidentes Abiertos por Dominio",las=1,  xlab = "Incidentes Abiertos", legend = TRUE, beside= TRUE, xlim=c(1,21),args.legend = list(x="topleft", cex = .65, bty = 'n'), names.arg = FALSE)
 ```
 
 ### Incidentes Generados por Dominio
@@ -131,7 +131,7 @@ metricagenerados<-table(generadodominio)
 
 
 
-barplot(as.matrix(metricagenerados), col=c('blue','red','black','yellow','pink','purple','gray','green','orange','yellow4','turquoise','tan4','tomato2'), main= "Incidentes Generados por Dominio",las=1,  xlab = "Incidentes Generados", legend = TRUE, beside= TRUE, args.legend = list(x="topleft", cex = .7, bty = 'n'), ylim=c(0,40))
+barplot(as.matrix(metricagenerados), col=c('blue','red','black','yellow','pink','purple','gray','green','orange','yellow4','turquoise','tan4','tomato2'), main= "Incidentes Generados por Dominio",las=1,  xlab = "Incidentes Generados", legend = TRUE, beside= TRUE, args.legend = list(x="topleft", cex = .8, bty = 'n'), ylim=c(0,40))
 
 
 ```

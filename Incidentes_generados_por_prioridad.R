@@ -1,5 +1,5 @@
 prioridad<-table(query$prioridad)
 
 
-pie(prioridad, col = c("steelblue", "darkred", "darkolivegreen4"), main="Incidentes generados en cada prioridad", labels = prioridad)
-legend("topright", c("Critica","Media", "Baja"), cex = 0.8,fill = c( "darkred", "darkolivegreen4","steelblue"))
+pie(prioridad, col = c("goldenrod1", "darkred", "darkorange1"), main="Incidentes generados en cada prioridad", labels = prioridad,  radius = 0.9)
+legend("topright", c("Crítica","Media", "Baja"), cex = 0.8,fill = c( "darkred", "darkorange1","goldenrod1"), bty = 'n')
